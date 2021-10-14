@@ -1,26 +1,36 @@
-import React from 'react'
+import React, {useState} from 'react'
 import App from './App'
+import './App.css'
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 
-export const counter = () => {
-    props.App()
-    const { data, setData } = props.data;
-    const decrementData = data => {
+export default function counter(){
+
+    const [data, setData]=useState(0);
+
+    const dataToCounter = (data) =>{
+        setData(data);
+    }
+
+    const decrementData = () => {
         setData(prevData => prevData - 1);
     };
 
-    const incrementData = data => {
+    const incrementData = () => {
         setData(prevData => prevData + 1);
     };
-
-// the rendering of the component
-    return (
+    return(
         <div className = "box">
-           <span>{data}</span>
-             <div className="button">
-                 <button onClick = {decrementData}>-</button>
-                 <button onClick = {incrementData}>+</button>
-             </div>
-        </div>
-    );
+        <App/>
+        <Stack direction="row" spacing={5}>
+        <Button variant="contained" color="error" onClick = {() => decrementData()}>
+          -
+        </Button>
+        <Button variant="contained" color="success" onClick = {() => incrementData()}>
+          +
+        </Button>
+      </Stack>
+      </div>
+    )
 }
